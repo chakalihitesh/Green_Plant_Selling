@@ -3,8 +3,13 @@ import cors from 'cors';
 import nodemailer from 'nodemailer';
 import QRCode from 'qrcode';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-dotenv.config({ path: '../.env' }); // Load .env from root
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, '../.env') }); // Load .env from root
 
 const app = express();
 app.use(cors());
