@@ -112,7 +112,16 @@ app.post('/api/verify-otp', (req, res) => {
     }
 });
 
-const PORT = process.env.SERVER_PORT || 3001;
+// Serve static frontend files in production
+const distPath = path.resolve(__dirname, '../dist');
+app.use(express.static(distPath));
+
+// Catch-all: serve index.html for client-side routing
+app.get('*', (req, res) => {
+    res.sendFile(path.join(distPath, 'index.html'));
+});
+
+const PORT = process.env.PORT || process.env.SERVER_PORT || 3001;
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Email Notification Server running on http://0.0.0.0:${PORT} with Gmail SMTP`);
+    console.log(`Server running on http://0.0.0.0:${PORT}`);
 });
