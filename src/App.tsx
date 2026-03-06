@@ -82,7 +82,7 @@ export default function App() {
     });
 
     const targetEmail = userEmail || 'guest@example.com';
-    fetch('http://localhost:3001/api/send-email', {
+    fetch(`http://${window.location.hostname}:3001/api/send-email`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -200,7 +200,7 @@ export default function App() {
                     const mailText = `Hi ${orderPayload.userName},\n\nyour ordered items are placed.\n\nPlease visit the nursery after 5-6 hours to collect your plants.\n\nOrder Details:\n${itemLists}\n\nTotal: ₹${orderPayload.totalCost}\n\n--- Nursery Details ---\nNursery Name: Green Plant Nursery\nOwner Name: John Doe\nLocation: 123 Green Way, Plant City\n\nThanks,\nGreen Plant Selling`;
 
                     // Send Email via local backend
-                    fetch('http://localhost:3001/api/send-email', {
+                    fetch(`http://${window.location.hostname}:3001/api/send-email`, {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({
@@ -423,7 +423,7 @@ function AuthScreen({ onLogin }: { onLogin: (email: string, username: string) =>
 
     setIsLoading(true);
     try {
-      const res = await fetch('http://localhost:3001/api/send-otp', {
+      const res = await fetch(`http://${window.location.hostname}:3001/api/send-otp`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
       });
@@ -448,7 +448,7 @@ function AuthScreen({ onLogin }: { onLogin: (email: string, username: string) =>
 
     setIsLoading(true);
     try {
-      const res = await fetch('http://localhost:3001/api/verify-otp', {
+      const res = await fetch(`http://${window.location.hostname}:3001/api/verify-otp`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp })
       });
